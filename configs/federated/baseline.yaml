@@ -21,7 +21,7 @@ client:
   early_stopping_patience: 3  # Keep for safety, but unlikely to trigger with 5 epochs
 
 server:
-  defense: "krum"   # "avg", "median", "trimmed_mean", "krum", "multi_krum", , flame <-- FLAME defence
+  defense: "flame"   # "avg", "median", "trimmed_mean", "krum", "multi_krum", , flame <-- FLAME defence
                     # if you use "krum" --> update the # of malicious clients in server.py, default value = 1
   
   # Privacy Parameters for FLAME (only for flame)
@@ -56,7 +56,7 @@ attack:
   source_label: 3    # Only used for label_flip
   flip_to_label: 0   # Only used for label_flip
   
-  aggressive: true         # Enable Model Replacement
+  aggressive: false         # Enable Model Replacement
   estimated_n_clients: 40  # Scaling Factor (Must match n_clients for full effect)
 
   # How many attackers?

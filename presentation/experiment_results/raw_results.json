@@ -1,0 +1,1822 @@
+[
+  {
+    "exp_name": "1. Clean Baseline (FedAvg)",
+    "defense": "avg",
+    "attack_type": "clean",
+    "num_malicious": 0,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.4,
+        "f1_score": 0.9275,
+        "asr": 0.0
+      },
+      {
+        "round": 2,
+        "accuracy": 91.29,
+        "f1_score": 0.9331,
+        "asr": 0.0
+      },
+      {
+        "round": 3,
+        "accuracy": 91.76,
+        "f1_score": 0.9358,
+        "asr": 0.0
+      },
+      {
+        "round": 4,
+        "accuracy": 92.07,
+        "f1_score": 0.9381,
+        "asr": 0.0
+      },
+      {
+        "round": 5,
+        "accuracy": 92.34,
+        "f1_score": 0.9401,
+        "asr": 0.0
+      },
+      {
+        "round": 6,
+        "accuracy": 92.44,
+        "f1_score": 0.941,
+        "asr": 0.0
+      },
+      {
+        "round": 7,
+        "accuracy": 92.64,
+        "f1_score": 0.9422,
+        "asr": 0.0
+      },
+      {
+        "round": 8,
+        "accuracy": 92.71,
+        "f1_score": 0.9432,
+        "asr": 0.0
+      },
+      {
+        "round": 9,
+        "accuracy": 92.85,
+        "f1_score": 0.9436,
+        "asr": 0.0
+      },
+      {
+        "round": 10,
+        "accuracy": 93.02,
+        "f1_score": 0.9452,
+        "asr": 0.0
+      },
+      {
+        "round": 11,
+        "accuracy": 93.0,
+        "f1_score": 0.9447,
+        "asr": 0.0
+      },
+      {
+        "round": 12,
+        "accuracy": 93.06,
+        "f1_score": 0.9451,
+        "asr": 0.0
+      },
+      {
+        "round": 13,
+        "accuracy": 93.09,
+        "f1_score": 0.9459,
+        "asr": 0.0
+      },
+      {
+        "round": 14,
+        "accuracy": 93.14,
+        "f1_score": 0.946,
+        "asr": 0.0
+      },
+      {
+        "round": 15,
+        "accuracy": 93.19,
+        "f1_score": 0.9462,
+        "asr": 0.0
+      }
+    ],
+    "final_accuracy": 93.19,
+    "final_f1": 0.9462,
+    "final_asr": 0.0,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.8933263816475495,
+        "recall": 0.9211827956989247,
+        "f1-score": 0.9070407623080995,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9546901560809766,
+        "recall": 0.9378776377713679,
+        "f1-score": 0.9462092204012865,
+        "support": 32935.0
+      },
+      "accuracy": 0.9318521393227903,
+      "macro avg": {
+        "precision": 0.924008268864263,
+        "recall": 0.9295302167351462,
+        "f1-score": 0.926624991354693,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9325427571392526,
+        "recall": 0.9318521393227903,
+        "f1-score": 0.9320725497787333,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17134,
+        1466
+      ],
+      [
+        2046,
+        30889
+      ]
+    ]
+  },
+  {
+    "exp_name": "2. Clean Baseline (Median)",
+    "defense": "median",
+    "attack_type": "clean",
+    "num_malicious": 0,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.47,
+        "f1_score": 0.9279,
+        "asr": 0.0
+      },
+      {
+        "round": 2,
+        "accuracy": 91.33,
+        "f1_score": 0.9331,
+        "asr": 0.0
+      },
+      {
+        "round": 3,
+        "accuracy": 91.73,
+        "f1_score": 0.9352,
+        "asr": 0.0
+      },
+      {
+        "round": 4,
+        "accuracy": 92.05,
+        "f1_score": 0.9378,
+        "asr": 0.0
+      },
+      {
+        "round": 5,
+        "accuracy": 92.26,
+        "f1_score": 0.9391,
+        "asr": 0.0
+      },
+      {
+        "round": 6,
+        "accuracy": 92.41,
+        "f1_score": 0.9405,
+        "asr": 0.0
+      },
+      {
+        "round": 7,
+        "accuracy": 92.58,
+        "f1_score": 0.9415,
+        "asr": 0.0
+      },
+      {
+        "round": 8,
+        "accuracy": 92.74,
+        "f1_score": 0.943,
+        "asr": 0.0
+      },
+      {
+        "round": 9,
+        "accuracy": 92.82,
+        "f1_score": 0.9432,
+        "asr": 0.0
+      },
+      {
+        "round": 10,
+        "accuracy": 92.99,
+        "f1_score": 0.9447,
+        "asr": 0.0
+      },
+      {
+        "round": 11,
+        "accuracy": 92.97,
+        "f1_score": 0.9445,
+        "asr": 0.0
+      },
+      {
+        "round": 12,
+        "accuracy": 92.98,
+        "f1_score": 0.9444,
+        "asr": 0.0
+      },
+      {
+        "round": 13,
+        "accuracy": 93.13,
+        "f1_score": 0.946,
+        "asr": 0.0
+      },
+      {
+        "round": 14,
+        "accuracy": 93.12,
+        "f1_score": 0.9457,
+        "asr": 0.0
+      },
+      {
+        "round": 15,
+        "accuracy": 93.17,
+        "f1_score": 0.9459,
+        "asr": 0.0
+      }
+    ],
+    "final_accuracy": 93.17,
+    "final_f1": 0.9459,
+    "final_asr": 0.0,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.8900155199172272,
+        "recall": 0.9249462365591398,
+        "f1-score": 0.9071447403110994,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9566526936811054,
+        "recall": 0.9354486109002581,
+        "f1-score": 0.9459318391157507,
+        "support": 32935.0
+      },
+      "accuracy": 0.9316580964393131,
+      "macro avg": {
+        "precision": 0.9233341067991663,
+        "recall": 0.9301974237296989,
+        "f1-score": 0.9265382897134251,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.932602020701419,
+        "recall": 0.9316580964393131,
+        "f1-score": 0.9319328085973358,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17204,
+        1396
+      ],
+      [
+        2126,
+        30809
+      ]
+    ]
+  },
+  {
+    "exp_name": "3. Clean Baseline (Krum)",
+    "defense": "krum",
+    "attack_type": "clean",
+    "num_malicious": 0,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.54,
+        "f1_score": 0.9287,
+        "asr": 0.0
+      },
+      {
+        "round": 2,
+        "accuracy": 91.24,
+        "f1_score": 0.9321,
+        "asr": 0.0
+      },
+      {
+        "round": 3,
+        "accuracy": 91.54,
+        "f1_score": 0.9349,
+        "asr": 0.0
+      },
+      {
+        "round": 4,
+        "accuracy": 91.84,
+        "f1_score": 0.9365,
+        "asr": 0.0
+      },
+      {
+        "round": 5,
+        "accuracy": 92.05,
+        "f1_score": 0.9386,
+        "asr": 0.0
+      },
+      {
+        "round": 6,
+        "accuracy": 92.26,
+        "f1_score": 0.94,
+        "asr": 0.0
+      },
+      {
+        "round": 7,
+        "accuracy": 92.43,
+        "f1_score": 0.9403,
+        "asr": 0.0
+      },
+      {
+        "round": 8,
+        "accuracy": 91.99,
+        "f1_score": 0.9392,
+        "asr": 0.0
+      },
+      {
+        "round": 9,
+        "accuracy": 92.65,
+        "f1_score": 0.942,
+        "asr": 0.0
+      },
+      {
+        "round": 10,
+        "accuracy": 92.51,
+        "f1_score": 0.9422,
+        "asr": 0.0
+      },
+      {
+        "round": 11,
+        "accuracy": 92.71,
+        "f1_score": 0.9433,
+        "asr": 0.0
+      },
+      {
+        "round": 12,
+        "accuracy": 92.66,
+        "f1_score": 0.9414,
+        "asr": 0.0
+      },
+      {
+        "round": 13,
+        "accuracy": 92.85,
+        "f1_score": 0.9436,
+        "asr": 0.0
+      },
+      {
+        "round": 14,
+        "accuracy": 92.86,
+        "f1_score": 0.9441,
+        "asr": 0.0
+      },
+      {
+        "round": 15,
+        "accuracy": 93.01,
+        "f1_score": 0.9456,
+        "asr": 0.0
+      }
+    ],
+    "final_accuracy": 93.01,
+    "final_f1": 0.9456,
+    "final_asr": 0.0,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.9110891848928356,
+        "recall": 0.8936021505376344,
+        "f1-score": 0.9022609450913335,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9405562897993512,
+        "recall": 0.9507514801882496,
+        "f1-score": 0.9456264061485496,
+        "support": 32935.0
+      },
+      "accuracy": 0.9301251576598428,
+      "macro avg": {
+        "precision": 0.9258227373460934,
+        "recall": 0.9221768153629419,
+        "f1-score": 0.9239436756199415,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9299210292723076,
+        "recall": 0.9301251576598428,
+        "f1-score": 0.9299749542097853,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        16621,
+        1979
+      ],
+      [
+        1622,
+        31313
+      ]
+    ]
+  },
+  {
+    "exp_name": "4. Clean Baseline (Multi-Krum)",
+    "defense": "multi_krum",
+    "attack_type": "clean",
+    "num_malicious": 0,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.44,
+        "f1_score": 0.9276,
+        "asr": 0.0
+      },
+      {
+        "round": 2,
+        "accuracy": 91.34,
+        "f1_score": 0.9336,
+        "asr": 0.0
+      },
+      {
+        "round": 3,
+        "accuracy": 91.76,
+        "f1_score": 0.9361,
+        "asr": 0.0
+      },
+      {
+        "round": 4,
+        "accuracy": 92.08,
+        "f1_score": 0.9379,
+        "asr": 0.0
+      },
+      {
+        "round": 5,
+        "accuracy": 92.29,
+        "f1_score": 0.94,
+        "asr": 0.0
+      },
+      {
+        "round": 6,
+        "accuracy": 92.47,
+        "f1_score": 0.9413,
+        "asr": 0.0
+      },
+      {
+        "round": 7,
+        "accuracy": 92.67,
+        "f1_score": 0.9425,
+        "asr": 0.0
+      },
+      {
+        "round": 8,
+        "accuracy": 92.72,
+        "f1_score": 0.9433,
+        "asr": 0.0
+      },
+      {
+        "round": 9,
+        "accuracy": 92.83,
+        "f1_score": 0.9434,
+        "asr": 0.0
+      },
+      {
+        "round": 10,
+        "accuracy": 92.93,
+        "f1_score": 0.9444,
+        "asr": 0.0
+      },
+      {
+        "round": 11,
+        "accuracy": 93.02,
+        "f1_score": 0.945,
+        "asr": 0.0
+      },
+      {
+        "round": 12,
+        "accuracy": 93.03,
+        "f1_score": 0.9449,
+        "asr": 0.0
+      },
+      {
+        "round": 13,
+        "accuracy": 93.13,
+        "f1_score": 0.9461,
+        "asr": 0.0
+      },
+      {
+        "round": 14,
+        "accuracy": 93.17,
+        "f1_score": 0.9463,
+        "asr": 0.0
+      },
+      {
+        "round": 15,
+        "accuracy": 93.15,
+        "f1_score": 0.9461,
+        "asr": 0.0
+      }
+    ],
+    "final_accuracy": 93.15,
+    "final_f1": 0.9461,
+    "final_asr": 0.0,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.8963231813160801,
+        "recall": 0.9161290322580645,
+        "f1-score": 0.9061178910425142,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9520354199975403,
+        "recall": 0.9401548504630333,
+        "f1-score": 0.9460578377304878,
+        "support": 32935.0
+      },
+      "accuracy": 0.9314834578441835,
+      "macro avg": {
+        "precision": 0.9241793006568102,
+        "recall": 0.928141941360549,
+        "f1-score": 0.9260878643865009,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.931927772001515,
+        "recall": 0.9314834578441835,
+        "f1-score": 0.9316427216269404,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17040,
+        1560
+      ],
+      [
+        1971,
+        30964
+      ]
+    ]
+  },
+  {
+    "exp_name": "5. Clean Baseline (FLAME)",
+    "defense": "flame",
+    "attack_type": "clean",
+    "num_malicious": 0,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.3,
+        "f1_score": 0.9278,
+        "asr": 0.0
+      },
+      {
+        "round": 2,
+        "accuracy": 91.35,
+        "f1_score": 0.9331,
+        "asr": 0.0
+      },
+      {
+        "round": 3,
+        "accuracy": 91.76,
+        "f1_score": 0.9361,
+        "asr": 0.0
+      },
+      {
+        "round": 4,
+        "accuracy": 92.06,
+        "f1_score": 0.9381,
+        "asr": 0.0
+      },
+      {
+        "round": 5,
+        "accuracy": 92.2,
+        "f1_score": 0.9394,
+        "asr": 0.0
+      },
+      {
+        "round": 6,
+        "accuracy": 92.52,
+        "f1_score": 0.941,
+        "asr": 0.0
+      },
+      {
+        "round": 7,
+        "accuracy": 92.57,
+        "f1_score": 0.9413,
+        "asr": 0.0
+      },
+      {
+        "round": 8,
+        "accuracy": 92.73,
+        "f1_score": 0.9433,
+        "asr": 0.0
+      },
+      {
+        "round": 9,
+        "accuracy": 92.95,
+        "f1_score": 0.9445,
+        "asr": 0.0
+      },
+      {
+        "round": 10,
+        "accuracy": 92.81,
+        "f1_score": 0.9439,
+        "asr": 0.0
+      },
+      {
+        "round": 11,
+        "accuracy": 92.96,
+        "f1_score": 0.9443,
+        "asr": 0.0
+      },
+      {
+        "round": 12,
+        "accuracy": 93.01,
+        "f1_score": 0.9451,
+        "asr": 0.0
+      },
+      {
+        "round": 13,
+        "accuracy": 92.93,
+        "f1_score": 0.9451,
+        "asr": 0.0
+      },
+      {
+        "round": 14,
+        "accuracy": 93.08,
+        "f1_score": 0.9456,
+        "asr": 0.0
+      },
+      {
+        "round": 15,
+        "accuracy": 93.21,
+        "f1_score": 0.9464,
+        "asr": 0.0
+      }
+    ],
+    "final_accuracy": 93.21,
+    "final_f1": 0.9464,
+    "final_asr": 0.0,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.8923820411556849,
+        "recall": 0.9232795698924732,
+        "f1-score": 0.9075679103688827,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9558081199095724,
+        "recall": 0.9371185668741461,
+        "f1-score": 0.9463710790175697,
+        "support": 32935.0
+      },
+      "accuracy": 0.9321237993596585,
+      "macro avg": {
+        "precision": 0.9240950805326287,
+        "recall": 0.9301990683833097,
+        "f1-score": 0.9269694946932262,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.932916394580722,
+        "recall": 0.9321237993596585,
+        "f1-score": 0.9323662485748496,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17173,
+        1427
+      ],
+      [
+        2071,
+        30864
+      ]
+    ]
+  },
+  {
+    "exp_name": "6. Backdoor vs FedAvg",
+    "defense": "avg",
+    "attack_type": "backdoor",
+    "num_malicious": 3,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.15,
+        "f1_score": 0.9265,
+        "asr": 14.03
+      },
+      {
+        "round": 2,
+        "accuracy": 91.07,
+        "f1_score": 0.9311,
+        "asr": 33.21
+      },
+      {
+        "round": 3,
+        "accuracy": 91.68,
+        "f1_score": 0.9354,
+        "asr": 43.65
+      },
+      {
+        "round": 4,
+        "accuracy": 91.95,
+        "f1_score": 0.9374,
+        "asr": 55.46
+      },
+      {
+        "round": 5,
+        "accuracy": 92.18,
+        "f1_score": 0.9392,
+        "asr": 63.23
+      },
+      {
+        "round": 6,
+        "accuracy": 92.31,
+        "f1_score": 0.94,
+        "asr": 74.84
+      },
+      {
+        "round": 7,
+        "accuracy": 92.49,
+        "f1_score": 0.9414,
+        "asr": 75.74
+      },
+      {
+        "round": 8,
+        "accuracy": 92.61,
+        "f1_score": 0.9423,
+        "asr": 83.17
+      },
+      {
+        "round": 9,
+        "accuracy": 92.79,
+        "f1_score": 0.9434,
+        "asr": 88.54
+      },
+      {
+        "round": 10,
+        "accuracy": 92.78,
+        "f1_score": 0.9431,
+        "asr": 92.72
+      },
+      {
+        "round": 11,
+        "accuracy": 92.91,
+        "f1_score": 0.9445,
+        "asr": 93.21
+      },
+      {
+        "round": 12,
+        "accuracy": 92.92,
+        "f1_score": 0.9447,
+        "asr": 96.06
+      },
+      {
+        "round": 13,
+        "accuracy": 92.98,
+        "f1_score": 0.9451,
+        "asr": 96.73
+      },
+      {
+        "round": 14,
+        "accuracy": 93.06,
+        "f1_score": 0.9455,
+        "asr": 97.15
+      },
+      {
+        "round": 15,
+        "accuracy": 93.09,
+        "f1_score": 0.946,
+        "asr": 97.58
+      }
+    ],
+    "final_accuracy": 93.09,
+    "final_f1": 0.946,
+    "final_asr": 97.58,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.9059649122807018,
+        "recall": 0.9023118279569893,
+        "f1-score": 0.9041346801346801,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9449560739169949,
+        "recall": 0.9471079398815849,
+        "f1-score": 0.9460307832284479,
+        "support": 32935.0
+      },
+      "accuracy": 0.9309401377704473,
+      "macro avg": {
+        "precision": 0.9254604930988484,
+        "recall": 0.9247098839192871,
+        "f1-score": 0.925082731681564,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.930883393089692,
+        "recall": 0.9309401377704473,
+        "f1-score": 0.9309096516180069,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        16783,
+        1817
+      ],
+      [
+        1742,
+        31193
+      ]
+    ]
+  },
+  {
+    "exp_name": "7. Backdoor vs Median",
+    "defense": "median",
+    "attack_type": "backdoor",
+    "num_malicious": 3,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.24,
+        "f1_score": 0.9275,
+        "asr": 2.36
+      },
+      {
+        "round": 2,
+        "accuracy": 91.17,
+        "f1_score": 0.9317,
+        "asr": 11.95
+      },
+      {
+        "round": 3,
+        "accuracy": 91.76,
+        "f1_score": 0.9357,
+        "asr": 17.43
+      },
+      {
+        "round": 4,
+        "accuracy": 92.02,
+        "f1_score": 0.9376,
+        "asr": 21.38
+      },
+      {
+        "round": 5,
+        "accuracy": 92.24,
+        "f1_score": 0.939,
+        "asr": 24.45
+      },
+      {
+        "round": 6,
+        "accuracy": 92.29,
+        "f1_score": 0.9389,
+        "asr": 32.37
+      },
+      {
+        "round": 7,
+        "accuracy": 92.51,
+        "f1_score": 0.9407,
+        "asr": 36.83
+      },
+      {
+        "round": 8,
+        "accuracy": 92.72,
+        "f1_score": 0.9425,
+        "asr": 47.02
+      },
+      {
+        "round": 9,
+        "accuracy": 92.73,
+        "f1_score": 0.9424,
+        "asr": 60.93
+      },
+      {
+        "round": 10,
+        "accuracy": 92.8,
+        "f1_score": 0.9426,
+        "asr": 71.57
+      },
+      {
+        "round": 11,
+        "accuracy": 92.96,
+        "f1_score": 0.9444,
+        "asr": 71.99
+      },
+      {
+        "round": 12,
+        "accuracy": 92.93,
+        "f1_score": 0.9443,
+        "asr": 75.96
+      },
+      {
+        "round": 13,
+        "accuracy": 93.04,
+        "f1_score": 0.9453,
+        "asr": 75.53
+      },
+      {
+        "round": 14,
+        "accuracy": 93.07,
+        "f1_score": 0.945,
+        "asr": 81.14
+      },
+      {
+        "round": 15,
+        "accuracy": 93.16,
+        "f1_score": 0.946,
+        "asr": 83.19
+      }
+    ],
+    "final_accuracy": 93.16,
+    "final_f1": 0.946,
+    "final_asr": 83.19,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.8925464867961873,
+        "recall": 0.9212903225806451,
+        "f1-score": 0.9066906531918834,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.954725383473528,
+        "recall": 0.937361469561257,
+        "f1-score": 0.9459637511299046,
+        "support": 32935.0
+      },
+      "accuracy": 0.9315610749975745,
+      "macro avg": {
+        "precision": 0.9236359351348576,
+        "recall": 0.9293258960709511,
+        "f1-score": 0.9263272021608939,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9322837908044965,
+        "recall": 0.9315610749975745,
+        "f1-score": 0.9317893139193255,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17136,
+        1464
+      ],
+      [
+        2063,
+        30872
+      ]
+    ]
+  },
+  {
+    "exp_name": "8. Backdoor vs Krum",
+    "defense": "krum",
+    "attack_type": "backdoor",
+    "num_malicious": 3,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.59,
+        "f1_score": 0.9291,
+        "asr": 1.89
+      },
+      {
+        "round": 2,
+        "accuracy": 91.21,
+        "f1_score": 0.9329,
+        "asr": 3.95
+      },
+      {
+        "round": 3,
+        "accuracy": 91.63,
+        "f1_score": 0.9359,
+        "asr": 2.03
+      },
+      {
+        "round": 4,
+        "accuracy": 91.91,
+        "f1_score": 0.9376,
+        "asr": 4.51
+      },
+      {
+        "round": 5,
+        "accuracy": 92.05,
+        "f1_score": 0.9385,
+        "asr": 1.75
+      },
+      {
+        "round": 6,
+        "accuracy": 92.43,
+        "f1_score": 0.941,
+        "asr": 2.15
+      },
+      {
+        "round": 7,
+        "accuracy": 92.08,
+        "f1_score": 0.9396,
+        "asr": 1.33
+      },
+      {
+        "round": 8,
+        "accuracy": 92.36,
+        "f1_score": 0.9408,
+        "asr": 1.25
+      },
+      {
+        "round": 9,
+        "accuracy": 92.55,
+        "f1_score": 0.9414,
+        "asr": 2.48
+      },
+      {
+        "round": 10,
+        "accuracy": 92.5,
+        "f1_score": 0.9405,
+        "asr": 4.51
+      },
+      {
+        "round": 11,
+        "accuracy": 92.9,
+        "f1_score": 0.9444,
+        "asr": 3.0
+      },
+      {
+        "round": 12,
+        "accuracy": 92.9,
+        "f1_score": 0.9445,
+        "asr": 2.98
+      },
+      {
+        "round": 13,
+        "accuracy": 92.91,
+        "f1_score": 0.9443,
+        "asr": 2.41
+      },
+      {
+        "round": 14,
+        "accuracy": 92.98,
+        "f1_score": 0.9448,
+        "asr": 3.31
+      },
+      {
+        "round": 15,
+        "accuracy": 93.08,
+        "f1_score": 0.9458,
+        "asr": 1.58
+      }
+    ],
+    "final_accuracy": 93.08,
+    "final_f1": 0.9458,
+    "final_asr": 1.58,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.9012596071733561,
+        "recall": 0.9078494623655914,
+        "f1-score": 0.9045425326762374,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9477423092167444,
+        "recall": 0.9438287536055867,
+        "f1-score": 0.9457814829464204,
+        "support": 32935.0
+      },
+      "accuracy": 0.9308431163287086,
+      "macro avg": {
+        "precision": 0.9245009581950503,
+        "recall": 0.925839107985589,
+        "f1-score": 0.925162007811329,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9309657833992026,
+        "recall": 0.9308431163287086,
+        "f1-score": 0.9308975307774982,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        16886,
+        1714
+      ],
+      [
+        1850,
+        31085
+      ]
+    ]
+  },
+  {
+    "exp_name": "9. Backdoor vs Multi-Krum",
+    "defense": "multi_krum",
+    "attack_type": "backdoor",
+    "num_malicious": 3,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.29,
+        "f1_score": 0.9279,
+        "asr": 1.09
+      },
+      {
+        "round": 2,
+        "accuracy": 91.3,
+        "f1_score": 0.9333,
+        "asr": 4.09
+      },
+      {
+        "round": 3,
+        "accuracy": 91.74,
+        "f1_score": 0.9362,
+        "asr": 3.88
+      },
+      {
+        "round": 4,
+        "accuracy": 92.01,
+        "f1_score": 0.9381,
+        "asr": 4.12
+      },
+      {
+        "round": 5,
+        "accuracy": 92.31,
+        "f1_score": 0.9401,
+        "asr": 4.42
+      },
+      {
+        "round": 6,
+        "accuracy": 92.5,
+        "f1_score": 0.9413,
+        "asr": 4.58
+      },
+      {
+        "round": 7,
+        "accuracy": 92.62,
+        "f1_score": 0.9425,
+        "asr": 3.9
+      },
+      {
+        "round": 8,
+        "accuracy": 92.68,
+        "f1_score": 0.9429,
+        "asr": 3.63
+      },
+      {
+        "round": 9,
+        "accuracy": 92.78,
+        "f1_score": 0.9433,
+        "asr": 4.34
+      },
+      {
+        "round": 10,
+        "accuracy": 92.85,
+        "f1_score": 0.9437,
+        "asr": 4.65
+      },
+      {
+        "round": 11,
+        "accuracy": 92.9,
+        "f1_score": 0.9446,
+        "asr": 3.59
+      },
+      {
+        "round": 12,
+        "accuracy": 92.96,
+        "f1_score": 0.9447,
+        "asr": 4.32
+      },
+      {
+        "round": 13,
+        "accuracy": 93.01,
+        "f1_score": 0.9454,
+        "asr": 3.85
+      },
+      {
+        "round": 14,
+        "accuracy": 93.09,
+        "f1_score": 0.9454,
+        "asr": 4.51
+      },
+      {
+        "round": 15,
+        "accuracy": 93.13,
+        "f1_score": 0.9462,
+        "asr": 3.18
+      }
+    ],
+    "final_accuracy": 93.13,
+    "final_f1": 0.9462,
+    "final_asr": 3.18,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.9022058430807028,
+        "recall": 0.9081720430107527,
+        "f1-score": 0.9051791120756638,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.947945873460929,
+        "recall": 0.9444056474874754,
+        "f1-score": 0.9461724489330312,
+        "support": 32935.0
+      },
+      "accuracy": 0.9313282235374017,
+      "macro avg": {
+        "precision": 0.9250758582708158,
+        "recall": 0.926288845249114,
+        "f1-score": 0.9256757805043475,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9314373925242412,
+        "recall": 0.9313282235374017,
+        "f1-score": 0.9313771434989179,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        16892,
+        1708
+      ],
+      [
+        1831,
+        31104
+      ]
+    ]
+  },
+  {
+    "exp_name": "10. Backdoor vs FLAME",
+    "defense": "flame",
+    "attack_type": "backdoor",
+    "num_malicious": 3,
+    "aggressive": false,
+    "scale_factor": 1,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.05,
+        "f1_score": 0.9267,
+        "asr": 0.61
+      },
+      {
+        "round": 2,
+        "accuracy": 91.31,
+        "f1_score": 0.9329,
+        "asr": 3.18
+      },
+      {
+        "round": 3,
+        "accuracy": 91.74,
+        "f1_score": 0.9356,
+        "asr": 4.59
+      },
+      {
+        "round": 4,
+        "accuracy": 91.99,
+        "f1_score": 0.9377,
+        "asr": 2.88
+      },
+      {
+        "round": 5,
+        "accuracy": 92.17,
+        "f1_score": 0.9398,
+        "asr": 2.37
+      },
+      {
+        "round": 6,
+        "accuracy": 92.36,
+        "f1_score": 0.9404,
+        "asr": 3.19
+      },
+      {
+        "round": 7,
+        "accuracy": 92.52,
+        "f1_score": 0.9412,
+        "asr": 3.8
+      },
+      {
+        "round": 8,
+        "accuracy": 92.69,
+        "f1_score": 0.9426,
+        "asr": 3.7
+      },
+      {
+        "round": 9,
+        "accuracy": 92.8,
+        "f1_score": 0.9437,
+        "asr": 2.95
+      },
+      {
+        "round": 10,
+        "accuracy": 92.99,
+        "f1_score": 0.9449,
+        "asr": 2.62
+      },
+      {
+        "round": 11,
+        "accuracy": 93.05,
+        "f1_score": 0.9452,
+        "asr": 3.78
+      },
+      {
+        "round": 12,
+        "accuracy": 93.0,
+        "f1_score": 0.9449,
+        "asr": 2.6
+      },
+      {
+        "round": 13,
+        "accuracy": 92.89,
+        "f1_score": 0.9438,
+        "asr": 3.29
+      },
+      {
+        "round": 14,
+        "accuracy": 93.06,
+        "f1_score": 0.9459,
+        "asr": 1.72
+      },
+      {
+        "round": 15,
+        "accuracy": 93.12,
+        "f1_score": 0.9458,
+        "asr": 2.65
+      }
+    ],
+    "final_accuracy": 93.12,
+    "final_f1": 0.9458,
+    "final_asr": 2.65,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.8966116878326396,
+        "recall": 0.9147849462365591,
+        "f1-score": 0.9056071533118663,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9513176485042079,
+        "recall": 0.940428115986033,
+        "f1-score": 0.9458415403172858,
+        "support": 32935.0
+      },
+      "accuracy": 0.93117298923062,
+      "macro avg": {
+        "precision": 0.9239646681684237,
+        "recall": 0.9276065311112961,
+        "f1-score": 0.925724346814576,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9315731861292942,
+        "recall": 0.93117298923062,
+        "f1-score": 0.9313201548840694,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17015,
+        1585
+      ],
+      [
+        1962,
+        30973
+      ]
+    ]
+  },
+  {
+    "exp_name": "11. Model Replace vs FedAvg",
+    "defense": "avg",
+    "attack_type": "backdoor",
+    "num_malicious": 1,
+    "aggressive": true,
+    "scale_factor": 10,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.08,
+        "f1_score": 0.9268,
+        "asr": 36.42
+      },
+      {
+        "round": 2,
+        "accuracy": 87.37,
+        "f1_score": 0.9008,
+        "asr": 99.67
+      },
+      {
+        "round": 3,
+        "accuracy": 90.64,
+        "f1_score": 0.9303,
+        "asr": 90.12
+      },
+      {
+        "round": 4,
+        "accuracy": 91.16,
+        "f1_score": 0.9288,
+        "asr": 99.69
+      },
+      {
+        "round": 5,
+        "accuracy": 90.95,
+        "f1_score": 0.9326,
+        "asr": 97.35
+      },
+      {
+        "round": 6,
+        "accuracy": 90.18,
+        "f1_score": 0.9187,
+        "asr": 99.71
+      },
+      {
+        "round": 7,
+        "accuracy": 91.1,
+        "f1_score": 0.9338,
+        "asr": 97.93
+      },
+      {
+        "round": 8,
+        "accuracy": 90.47,
+        "f1_score": 0.9212,
+        "asr": 99.81
+      },
+      {
+        "round": 9,
+        "accuracy": 91.07,
+        "f1_score": 0.9336,
+        "asr": 98.89
+      },
+      {
+        "round": 10,
+        "accuracy": 90.19,
+        "f1_score": 0.9188,
+        "asr": 99.76
+      },
+      {
+        "round": 11,
+        "accuracy": 91.79,
+        "f1_score": 0.9378,
+        "asr": 99.13
+      },
+      {
+        "round": 12,
+        "accuracy": 90.84,
+        "f1_score": 0.9251,
+        "asr": 99.59
+      },
+      {
+        "round": 13,
+        "accuracy": 91.79,
+        "f1_score": 0.9379,
+        "asr": 99.45
+      },
+      {
+        "round": 14,
+        "accuracy": 90.72,
+        "f1_score": 0.9235,
+        "asr": 99.65
+      },
+      {
+        "round": 15,
+        "accuracy": 92.08,
+        "f1_score": 0.9397,
+        "asr": 99.45
+      }
+    ],
+    "final_accuracy": 92.08,
+    "final_f1": 0.9397,
+    "final_asr": 99.45,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.9331662489557226,
+        "recall": 0.840752688172043,
+        "f1-score": 0.8845522936817694,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9148287661385398,
+        "recall": 0.9659936238044633,
+        "f1-score": 0.9397152646502835,
+        "support": 32935.0
+      },
+      "accuracy": 0.9207916949645871,
+      "macro avg": {
+        "precision": 0.9239975075471312,
+        "recall": 0.9033731559882532,
+        "f1-score": 0.9121337791660264,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9214471260958427,
+        "recall": 0.9207916949645871,
+        "f1-score": 0.9198058582271853,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        15638,
+        2962
+      ],
+      [
+        1120,
+        31815
+      ]
+    ]
+  },
+  {
+    "exp_name": "12. Model Replace vs Median",
+    "defense": "median",
+    "attack_type": "backdoor",
+    "num_malicious": 1,
+    "aggressive": true,
+    "scale_factor": 10,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.4,
+        "f1_score": 0.9277,
+        "asr": 2.7
+      },
+      {
+        "round": 2,
+        "accuracy": 91.31,
+        "f1_score": 0.9332,
+        "asr": 5.02
+      },
+      {
+        "round": 3,
+        "accuracy": 91.77,
+        "f1_score": 0.9358,
+        "asr": 7.24
+      },
+      {
+        "round": 4,
+        "accuracy": 92.08,
+        "f1_score": 0.9379,
+        "asr": 9.27
+      },
+      {
+        "round": 5,
+        "accuracy": 92.25,
+        "f1_score": 0.9396,
+        "asr": 7.7
+      },
+      {
+        "round": 6,
+        "accuracy": 92.37,
+        "f1_score": 0.9396,
+        "asr": 10.91
+      },
+      {
+        "round": 7,
+        "accuracy": 92.66,
+        "f1_score": 0.9425,
+        "asr": 9.65
+      },
+      {
+        "round": 8,
+        "accuracy": 92.75,
+        "f1_score": 0.9428,
+        "asr": 9.63
+      },
+      {
+        "round": 9,
+        "accuracy": 92.9,
+        "f1_score": 0.9439,
+        "asr": 9.42
+      },
+      {
+        "round": 10,
+        "accuracy": 92.78,
+        "f1_score": 0.9426,
+        "asr": 12.28
+      },
+      {
+        "round": 11,
+        "accuracy": 92.99,
+        "f1_score": 0.9445,
+        "asr": 10.78
+      },
+      {
+        "round": 12,
+        "accuracy": 92.85,
+        "f1_score": 0.9431,
+        "asr": 12.88
+      },
+      {
+        "round": 13,
+        "accuracy": 93.06,
+        "f1_score": 0.945,
+        "asr": 12.52
+      },
+      {
+        "round": 14,
+        "accuracy": 93.13,
+        "f1_score": 0.9458,
+        "asr": 12.9
+      },
+      {
+        "round": 15,
+        "accuracy": 93.19,
+        "f1_score": 0.9464,
+        "asr": 13.1
+      }
+    ],
+    "final_accuracy": 93.19,
+    "final_f1": 0.9464,
+    "final_asr": 13.1,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.897032516047564,
+        "recall": 0.9166129032258065,
+        "f1-score": 0.9067170132425677,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9523194687817025,
+        "recall": 0.9405799301654775,
+        "f1-score": 0.9464132958572651,
+        "support": 32935.0
+      },
+      "accuracy": 0.9319297564761813,
+      "macro avg": {
+        "precision": 0.9246759924146333,
+        "recall": 0.928596416695642,
+        "f1-score": 0.9265651545499164,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9323653148891057,
+        "recall": 0.9319297564761813,
+        "f1-score": 0.9320861229333615,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17049,
+        1551
+      ],
+      [
+        1957,
+        30978
+      ]
+    ]
+  },
+  {
+    "exp_name": "13. Model Replace vs FLAME",
+    "defense": "flame",
+    "attack_type": "backdoor",
+    "num_malicious": 1,
+    "aggressive": true,
+    "scale_factor": 10,
+    "rounds": [
+      {
+        "round": 1,
+        "accuracy": 90.33,
+        "f1_score": 0.928,
+        "asr": 1.3
+      },
+      {
+        "round": 2,
+        "accuracy": 91.39,
+        "f1_score": 0.9336,
+        "asr": 2.9
+      },
+      {
+        "round": 3,
+        "accuracy": 91.79,
+        "f1_score": 0.9356,
+        "asr": 4.82
+      },
+      {
+        "round": 4,
+        "accuracy": 92.09,
+        "f1_score": 0.9385,
+        "asr": 3.32
+      },
+      {
+        "round": 5,
+        "accuracy": 92.27,
+        "f1_score": 0.94,
+        "asr": 3.39
+      },
+      {
+        "round": 6,
+        "accuracy": 92.42,
+        "f1_score": 0.9407,
+        "asr": 4.56
+      },
+      {
+        "round": 7,
+        "accuracy": 92.59,
+        "f1_score": 0.9419,
+        "asr": 3.93
+      },
+      {
+        "round": 8,
+        "accuracy": 92.71,
+        "f1_score": 0.9428,
+        "asr": 4.31
+      },
+      {
+        "round": 9,
+        "accuracy": 92.88,
+        "f1_score": 0.944,
+        "asr": 3.69
+      },
+      {
+        "round": 10,
+        "accuracy": 92.95,
+        "f1_score": 0.9447,
+        "asr": 3.21
+      },
+      {
+        "round": 11,
+        "accuracy": 93.07,
+        "f1_score": 0.9456,
+        "asr": 4.28
+      },
+      {
+        "round": 12,
+        "accuracy": 92.98,
+        "f1_score": 0.9446,
+        "asr": 4.46
+      },
+      {
+        "round": 13,
+        "accuracy": 93.11,
+        "f1_score": 0.9456,
+        "asr": 4.45
+      },
+      {
+        "round": 14,
+        "accuracy": 93.05,
+        "f1_score": 0.9457,
+        "asr": 2.74
+      },
+      {
+        "round": 15,
+        "accuracy": 93.06,
+        "f1_score": 0.9457,
+        "asr": 3.32
+      }
+    ],
+    "final_accuracy": 93.06,
+    "final_f1": 0.9457,
+    "final_asr": 3.32,
+    "classification_report": {
+      "Normal": {
+        "precision": 0.9048234977095123,
+        "recall": 0.9026344086021505,
+        "f1-score": 0.9037276275063921,
+        "support": 18600.0
+      },
+      "Attack": {
+        "precision": 0.9450879320800485,
+        "recall": 0.946379231820252,
+        "f1-score": 0.9457331411666541,
+        "support": 32935.0
+      },
+      "accuracy": 0.9305908605801883,
+      "macro avg": {
+        "precision": 0.9249557148947805,
+        "recall": 0.9245068202112012,
+        "f1-score": 0.9247303843365231,
+        "support": 51535.0
+      },
+      "weighted avg": {
+        "precision": 0.9305557019589275,
+        "recall": 0.9305908605801883,
+        "f1-score": 0.930572521120455,
+        "support": 51535.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        16789,
+        1811
+      ],
+      [
+        1766,
+        31169
+      ]
+    ]
+  }
+]
