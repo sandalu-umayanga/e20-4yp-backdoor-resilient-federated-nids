@@ -20,6 +20,7 @@ dependencies:
   - llvmlite
   - pynndescent
   - umap-learn
+  - ipykernel 
   - pip                  
 
   # 2. The Python Libraries (Installed via pip inside conda)
