@@ -2,11 +2,11 @@ defaults:
   - _self_
 
 simulation:
-  rounds: 15 
+  rounds: 20 
   n_clients: 10
   fraction: 1.0
-  partition_method: "iid"
-  alpha: 0.5
+  partition_method: "dirichlet" 
+  alpha: 0.1
 
 client:
   epochs: 5  # FL: Use 3-5 local epochs per round (not 30!)
@@ -21,7 +21,7 @@ client:
   early_stopping_patience: 3  # Keep for safety, but unlikely to trigger with 5 epochs
 
 server:
-  defense: "krum"   # "avg", "median", "trimmed_mean", "krum", "multi_krum", "flame"
+  defense: "flame"   # "avg", "median", "trimmed_mean", "krum", "multi_krum", "flame"
   expected_malicious: 3  # Defender's ESTIMATE of malicious clients (safety condition n>2f+2) (used by "krum")
   # FLAME: Differential Privacy noise parameters (required for DP guarantee — Theorem 1)
   privacy:
@@ -45,10 +45,10 @@ attack:
   source_label: 3    # Only used for label_flip
   flip_to_label: 0   # Only used for label_flip
   
-  aggressive: false         # Enable Model Replacement
-  stealth: true            # Enable stealth mode (Krum bypass)
-  target_norm_bound: 10    # L2 norm "speed limit" for stealth scaling
+  aggressive: true        # Enable Model Replacement
+  stealth: true           # Enable stealth mode (Krum bypass)
+  target_norm_bound: 3    # L2 norm "speed limit" for stealth scaling
   estimated_n_clients: 10  # Model replacement scale factor — MUST match simulation.n_clients (used oly for Model replacement attacks)
 
   # How many attackers?
-  num_malicious_clients: 3  # Example: 10% of the network (4 out of 40) (used by attacker)
+  num_malicious_clients: 4  # Example: 10% of the network (4 out of 40) (used by attacker)

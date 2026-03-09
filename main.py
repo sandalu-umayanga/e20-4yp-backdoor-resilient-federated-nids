@@ -152,7 +152,8 @@ def main(cfg: DictConfig):
             config=cfg,  # <--- PASS THE FULL CONFIG HERE
             lr=cfg.client.lr,
             device=cfg.client.device,
-            is_malicious=is_malicious # <--- PASS THE FLAG
+            is_malicious=is_malicious, # <--- PASS THE FLAG
+            num_classes=num_classes
         )
         clients.append(client)
 
@@ -173,16 +174,29 @@ def main(cfg: DictConfig):
         
         # B. Training Phase
         client_updates = []
+        global_weights = server.global_model.state_dict()
         
         for cid in active_clients_indices:
             client = clients[cid]
             
+            # Skip clients with empty datasets (can happen with extreme Dirichlet)
+            if len(client.dataset) == 0:
+                print(f"  Client {cid:2d} [SKIP]: 0 samples, skipping.")
+                continue
+            
             # Train and get updates
             w_local, n_samples, loss = client.train(
-                global_weights=server.global_model.state_dict(),
+                global_weights=global_weights,
                 epochs=cfg.client.epochs,
                 batch_size=cfg.client.batch_size
             )
+            
+            # 📏 Log update norms for analysis
+            delta_norm = torch.norm(torch.cat([
+                (w_local[k] - global_weights[k]).view(-1).float() for k in w_local
+            ])).item()
+            role = "MAL" if cid in malicious_ids else "BEN"
+            print(f"  Client {cid:2d} [{role}]: ||Δ|| = {delta_norm:.2f}, samples = {n_samples}")
             
             client_updates.append((w_local, n_samples, loss))
 

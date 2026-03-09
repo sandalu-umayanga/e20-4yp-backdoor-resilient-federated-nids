@@ -7,7 +7,7 @@ from src.client.attacker import Attacker
 from src.utils.class_weights import get_class_weights
 
 class Client:
-    def __init__(self, client_id, dataset, indices, model, config , lr=0.01 , device='cpu', is_malicious=False):
+    def __init__(self, client_id, dataset, indices, model, config , lr=0.01 , device='cpu', is_malicious=False, num_classes=2):
         self.client_id = client_id
         self.device = device
         self.is_malicious = is_malicious
@@ -28,7 +28,7 @@ class Client:
         if config.client.get('use_class_weights', False):
             local_labels = torch.tensor([dataset[i][1] for i in indices])
             weight_method = config.client.get('weight_method', 'sqrt')
-            self.class_weights = get_class_weights(local_labels, device, method=weight_method)
+            self.class_weights = get_class_weights(local_labels, device, method=weight_method, num_classes=num_classes)
             # print(f"   Client {client_id}: Using {weight_method} class weights")
         else:
             self.class_weights = None
