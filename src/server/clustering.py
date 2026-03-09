@@ -1,4 +1,5 @@
 #FLAME's clustering method (Algorithm 1, §4.2 — Nguyen et al. 2022)
+#Sentinel defense: Cosine-trust + median aggregation (our contribution)
 
 import torch
 import numpy as np
@@ -73,3 +74,105 @@ def flame_clustering(weights_list, global_model_weights):
     accepted_weights = [weights_list[i] for i in selected_indices]
     
     return accepted_weights
+
+
+def sentinel_filtering(weights_list, global_model_weights, sensitivity=1.5, expected_malicious=3):
+    """
+    Sentinel v5: Sybil-aware pairwise filtering + multi-client rejection.
+    
+    Two signals:
+      Signal 1 — Sybil score (pairwise cosine similarity concentration):
+        For each client, measure average cosine similarity to its k most
+        similar peers (k = expected_malicious - 1). Backdoor clients share
+        the same attack objective → their updates are highly similar to each
+        other. Honest non-IID clients have diverse data → lower pairwise
+        similarity. Unlike cosine-to-median (which breaks when the center
+        is contaminated by 40% attackers), this detects COORDINATED updates
+        regardless of where the center sits.
+      
+      Signal 2 — One-sided below-median norm (stealth scaling signature).
+    
+    Rejection: Always remove top expected_malicious clients by fused score.
+    This guarantees multiple attackers are removed each round, leaving the
+    trimmed median aggregation with a clean honest majority.
+    """
+    n_clients = len(weights_list)
+    if n_clients <= 2:
+        print("⚠️ Sentinel: Too few clients, accepting all.")
+        return weights_list
+
+    keys = sorted(weights_list[0].keys())
+
+    # ── Flatten deltas & compute norms ────────────────────────────────────
+    flat_updates = []
+    norms = []
+    for w in weights_list:
+        parts = []
+        for key in keys:
+            delta = w[key] - global_model_weights[key]
+            parts.append(delta.view(-1).float())
+        flat = torch.cat(parts).cpu().numpy()
+        flat_updates.append(flat)
+        norms.append(np.linalg.norm(flat))
+
+    update_matrix = np.array(flat_updates, dtype=np.float64)
+    norms = np.array(norms, dtype=np.float64)
+
+    # ── Signal 1: Sybil detection via pairwise cosine similarity ──────────
+    sim_matrix = 1.0 - cosine_distances(update_matrix)
+    k_peers = max(1, expected_malicious - 1)
+    sybil_scores = np.zeros(n_clients)
+    for i in range(n_clients):
+        sims = sim_matrix[i].copy()
+        sims[i] = -np.inf  # exclude self
+        top_k_sims = np.sort(sims)[-k_peers:]
+        sybil_scores[i] = np.mean(top_k_sims)
+
+    med_sybil = np.median(sybil_scores)
+    mad_sybil = np.median(np.abs(sybil_scores - med_sybil)) * 1.4826
+    sybil_anomaly = np.maximum(
+        (sybil_scores - med_sybil) / max(mad_sybil, 1e-10), 0.0
+    )
+
+    # ── Signal 2: One-sided norm test (below-median = stealth suspect) ────
+    med_norm = np.median(norms)
+    mad_norm = np.median(np.abs(norms - med_norm)) * 1.4826
+    norm_scores = np.maximum(
+        (med_norm - norms) / max(mad_norm, 1e-10), 0.0
+    )
+
+    # ── Fuse signals ──────────────────────────────────────────────────────
+    combined = 0.6 * sybil_anomaly + 0.4 * norm_scores
+
+    # Reject top expected_malicious clients + any beyond IQR fence
+    n_reject = min(expected_malicious, (n_clients - 1) // 2)
+    sorted_desc = np.argsort(combined)[::-1]
+
+    trusted_mask = np.ones(n_clients, dtype=bool)
+    for idx in sorted_desc[:n_reject]:
+        trusted_mask[idx] = False
+
+    q1, q3 = np.percentile(combined, [25, 75])
+    iqr = q3 - q1
+    threshold = q3 + sensitivity * iqr
+    trusted_mask[combined > threshold] = False
+
+    # Safety: keep at least ⌊n/2⌋ + 1
+    min_keep = n_clients // 2 + 1
+    if np.sum(trusted_mask) < min_keep:
+        sorted_asc = np.argsort(combined)
+        trusted_mask = np.zeros(n_clients, dtype=bool)
+        trusted_mask[sorted_asc[:min_keep]] = True
+
+    selected_indices = np.where(trusted_mask)[0]
+    rejected_indices = np.where(~trusted_mask)[0]
+
+    print(f"🛡️ Sentinel: Accepted {len(selected_indices)}/{n_clients} "
+          f"| Rejected clients: {list(rejected_indices)}")
+    for i in range(n_clients):
+        tag = "✅" if trusted_mask[i] else "❌"
+        print(f"   [{tag}] Client {i}: sybil={sybil_anomaly[i]:.3f}, "
+              f"norm={norm_scores[i]:.3f}, "
+              f"combined={combined[i]:.3f} (thr={threshold:.3f})")
+
+    return [weights_list[i] for i in selected_indices]

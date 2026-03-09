@@ -161,6 +161,68 @@ def fed_multi_krum(weights_list, f, m=None):
     # Note: passing 1 as n_samples assumes equal weighting for selected clients
 
 
+def sentinel_aggregate(weights_list, global_model_weights, privacy_cfg=None, expected_malicious=3):
+    """
+    Sentinel aggregation: Trimmed Coordinate-wise Median + DP Noise.
+    
+    Key insight: Norm-based clipping HURTS against stealth-scaled attacks.
+    Stealth attackers have small norms (≤ bound), so clipping with
+    median-of-norms shrinks honest updates (large norms) MORE than
+    malicious ones, amplifying the attack signal relative to honest signal.
+    
+    Instead, trimmed median inherently handles outliers: for each parameter
+    coordinate, sort all n values, discard top-f and bottom-f extremes
+    (f = expected_malicious), then take the median of the remaining n-2f
+    values. With 4 actual malicious and f=3 trim, at most 1 malicious
+    survives in the middle, and the median picks an honest value.
+    
+    Pipeline: deltas → sort per-coordinate → trim extremes → median → DP noise
+    """
+    # 1. Compute deltas and L2 norms
+    norms = []
+    diffs = []
+    for w in weights_list:
+        diff = {}
+        total_norm_sq = 0.0
+        for key in w.keys():
+            d = w[key] - global_model_weights[key]
+            diff[key] = d
+            total_norm_sq += torch.sum(d ** 2).item()
+        norms.append(total_norm_sq ** 0.5)
+        diffs.append(diff)
+
+    n = len(diffs)
+    trim = min(expected_malicious, (n - 1) // 2)  # keep at least 1 value
+
+    # 2. Trimmed coordinate-wise median of deltas
+    new_weights = copy.deepcopy(global_model_weights)
+    for key in new_weights.keys():
+        stacked = torch.stack([d[key] for d in diffs], dim=0)
+        if trim > 0 and n - 2 * trim >= 1:
+            sorted_vals, _ = torch.sort(stacked, dim=0)
+            trimmed = sorted_vals[trim : n - trim]
+            med_delta = torch.median(trimmed, dim=0).values
+        else:
+            med_delta = torch.median(stacked, dim=0).values
+        new_weights[key] = new_weights[key] + med_delta
+
+    # 3. DP Noise (calibrated to median of norms)
+    if privacy_cfg:
+        S = np.median(norms)
+        epsilon = privacy_cfg.get('epsilon', 300.0)
+        delta = privacy_cfg.get('delta', 1e-5)
+        lambda_val = (1.0 / epsilon) * np.sqrt(2 * np.log(1.25 / delta))
+        sigma = lambda_val * S
+        print(f"   🤫 Adding DP Noise: sigma={sigma:.6f} (epsilon={epsilon})")
+        for key in new_weights.keys():
+            noise = torch.normal(
+                mean=0.0, std=sigma, size=new_weights[key].shape
+            ).to(new_weights[key].device)
+            new_weights[key] += noise
+
+    return new_weights
+
+
 def fed_adaptive_clipping(weights_list, global_model_weights, privacy_cfg=None):
     """
     FLAME Part 2 & 3: Adaptive Clipping + Adaptive Noising (DP).
