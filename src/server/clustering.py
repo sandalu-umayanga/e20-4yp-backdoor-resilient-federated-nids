@@ -135,14 +135,33 @@ def sentinel_filtering(weights_list, global_model_weights, sensitivity=1.5, expe
     )
 
     # ── Signal 2: One-sided norm test (below-median = stealth suspect) ────
+    # Evasion attacks that constrain their gradients to perfectly match cosine 
+    # directions (like Gradient Alignment) inevitably suffer from gradient starvation, 
+    # shrinking their overall L2 norm significantly below the median honest client.
     med_norm = np.median(norms)
     mad_norm = np.median(np.abs(norms - med_norm)) * 1.4826
     norm_scores = np.maximum(
         (med_norm - norms) / max(mad_norm, 1e-10), 0.0
     )
+    
+    # ── Signal 3: Structural Sparsity (Kurtosis/Infinity norm) ────────────
+    # Benign updates are typically sparse (high max weight relative to norm).
+    # Aligned malicious updates are artificially dense (low max weight).
+    # We penalize updates that have an anomalously LOW sparsity.
+    normalized_updates = update_matrix / (norms[:, None] + 1e-10)
+    sparsity_scores = np.max(np.abs(normalized_updates), axis=1)
+    
+    med_sparsity = np.median(sparsity_scores)
+    mad_sparsity = np.median(np.abs(sparsity_scores - med_sparsity)) * 1.4826
+    # Anomaly: lower than median sparsity
+    sparsity_anomaly = np.maximum(
+        (med_sparsity - sparsity_scores) / max(mad_sparsity, 1e-10), 0.0
+    )
 
     # ── Fuse signals ──────────────────────────────────────────────────────
-    combined = 0.6 * sybil_anomaly + 0.4 * norm_scores
+    # We deeply trust the norm_score to catch norm-starved evasion attacks, 
+    # while sparsity catches attacks that scale their norms to match the median.
+    combined = 0.4 * sybil_anomaly + 0.4 * norm_scores + 0.2 * sparsity_anomaly    # should defined as a + b + c = 1.0
 
     # Reject top expected_malicious clients + any beyond IQR fence
     n_reject = min(expected_malicious, (n_clients - 1) // 2)
@@ -172,7 +191,11 @@ def sentinel_filtering(weights_list, global_model_weights, sensitivity=1.5, expe
     for i in range(n_clients):
         tag = "✅" if trusted_mask[i] else "❌"
         print(f"   [{tag}] Client {i}: sybil={sybil_anomaly[i]:.3f}, "
-              f"norm={norm_scores[i]:.3f}, "
+              f"norm={norm_scores[i]:.3f}, sparsity={sparsity_anomaly[i]:.3f}, "
               f"combined={combined[i]:.3f} (thr={threshold:.3f})")
+
+    accepted_weights = [weights_list[i] for i in selected_indices]
+    
+    return accepted_weights
 
     return [weights_list[i] for i in selected_indices]
