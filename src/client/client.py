@@ -15,7 +15,8 @@ class Client:
         self.config = config
         
         # 1. Create Local Data Slice
-        self.dataset = Subset(dataset, indices)
+        self.clean_dataset = Subset(dataset, indices)
+        self.dataset = self.clean_dataset
         
         # 2. RED TEAM INTEGRATION 😈
         if self.is_malicious:
@@ -43,6 +44,36 @@ class Client:
             self.criterion = nn.CrossEntropyLoss()
 
     def train(self, global_weights, epochs=1, batch_size=32):
+        # 🛡️🔥 FLAME Evasion: Train shadow model on clean data to get reference update
+        evade_flame = self.is_malicious and self.config.attack.get('flame_evasion', False)
+        clean_delta_flat = None
+        global_weights_dev = {k: v.to(self.device) for k, v in global_weights.items()}
+
+        if evade_flame:
+            # print(f"🥷 Client {self.client_id} executing FLAME Evasion (Gradient Alignment)...")
+            clean_model = copy.deepcopy(self.model).to(self.device)
+            clean_model.load_state_dict(global_weights)
+            clean_model.train()
+            clean_opt = optim.Adam(clean_model.parameters(), lr=self.lr)
+            clean_loader = DataLoader(self.clean_dataset, batch_size=batch_size, shuffle=True)
+            
+            for _ in range(epochs):
+                for b_X, b_y in clean_loader:
+                    b_X, b_y = b_X.to(self.device), b_y.to(self.device)
+                    clean_opt.zero_grad()
+                    out = clean_model(b_X)
+                    l = self.criterion(out, b_y)
+                    l.backward()
+                    clean_opt.step()
+            
+            # Compute clean update delta
+            with torch.no_grad():
+                c_delta_parts = []
+                for name, param in clean_model.named_parameters():
+                     if name in global_weights_dev:
+                         c_delta_parts.append((param - global_weights_dev[name]).view(-1))
+                clean_delta_flat = torch.cat(c_delta_parts).detach()
+
         # Load global weights
         self.model.load_state_dict(global_weights)
         self.model.train()
@@ -65,6 +96,7 @@ class Client:
         patience_counter = 0
         
         # Training loop
+        penalty_lambda = self.config.attack.get('flame_evasion_lambda', 5.0) if hasattr(self.config, 'attack') else 5.0
         for epoch in range(epochs):
             epoch_loss = 0.0
             for batch_X, batch_y in train_loader:
@@ -73,6 +105,38 @@ class Client:
                 self.optimizer.zero_grad()
                 outputs = self.model(batch_X)
                 loss = self.criterion(outputs, batch_y)
+                
+                # 🥷 APPLY ALIGNMENT PENALTY
+                if evade_flame and clean_delta_flat is not None:
+                    curr_delta_parts = []
+                    # Keep track of grads
+                    for name, param in self.model.named_parameters():
+                        # Parameter order matches state_dict keys because we iterate consistently
+                        # Actually named_parameters() might be slightly different than state_dict().keys()
+                        # To be safe, match by name
+                        pass
+                    
+                    # Safer way matching global_weights_dev
+                    for k, v in self.model.named_parameters():
+                         if k in global_weights_dev:
+                             curr_delta_parts.append((v - global_weights_dev[k]).view(-1))
+                    
+                    curr_delta_flat = torch.cat(curr_delta_parts)
+                    
+                    curr_norm = torch.norm(curr_delta_flat)
+                    clean_norm = torch.norm(clean_delta_flat)
+                    
+                    if curr_norm > 1e-6 and clean_norm > 1e-6:
+                        # Compute cosine similarity
+                        cos_sim = torch.nn.functional.cosine_similarity(
+                            curr_delta_flat.unsqueeze(0), 
+                            clean_delta_flat.unsqueeze(0)
+                        )[0]
+                        
+                        # We want cos_sim to be 1.0 (exact direction match)
+                        align_loss = 1.0 - cos_sim
+                        loss = loss + penalty_lambda * align_loss
+
                 loss.backward()
                 self.optimizer.step()
                 epoch_loss += loss.item()

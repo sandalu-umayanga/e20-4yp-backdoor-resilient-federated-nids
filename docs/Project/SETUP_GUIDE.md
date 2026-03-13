@@ -29,8 +29,8 @@ This project uses a shared conda environment defined in environment.yml.
 
 ⚠️ Do NOT use the base environment.
 
-```
-conda env create -f environment.yml
+```conda env create -f environment.yml
+
 ```
 This creates an environment named:fl-nids
 
